@@ -121,7 +121,7 @@ const Menu = () => {
             setPlay(true)
        }
 
-}, [idSong , like , playMode, changePlayList , likedSongs?.length ])
+}, [idSong , like , playMode, changePlayList , likedSongs?.length , playMusic?.data?.['128'] ])
 
       
 
