@@ -248,46 +248,48 @@ const handleRemoveLikeSong = (e) => {
     
     <div className = "w-screen bg-stone-900 px-5 fixed bottom-0 py-1 z-[9999999999]">
         <div className = "flex items-center justify-between w-full text-gray-300 text-sm py-2 ">
-            {
-                  infoSong &&
+      
+                  
                   <div className = {` flex items-center gap-4 relative  md:w-[22%] w-[5rem]  overflow-hidden ${open ? "-translate-x-[5.4rem]" : ""} ease-in-out duration-300`} >
-                
-                  <span className = {`overflow-hidden relative w-16  cursor-pointer group  `}>
-                        {
-                              !open  && <span className = " opacity-0 rounded-full w-6 h-6 absolute right-[5px] top-[10%] bg-neutral-800/80 hidden md:flex items-center justify-center hover:scale-110 ease-in-out duration-300 hover:bg-neutral-800/90 group-hover:opacity-100">
-                                            <i onClick = {() => addOpen(true)} className='bx bx-chevron-up text-2xl hover:text-white'/>
-                                      </span>
-                        }
-                        <Link href = {`/Detail/${idPlayList}`}>
-                            <img className = {``} src= {infoSong?.thumbnail} alt=""/>
-                        </Link>  
-                  </span>
-           
-
-            <div className = "max-w-[14rem]  lg:block md:block sm:block hidden">
                     {
-                        infoSong?.title?.length > 30 ?
-                        <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title?.slice(0,22) +'.....'}</p>
-                        :
-                        <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title}</p>
+                              infoSong &&
+                                    <div className = {` flex items-center gap-4 relative   ${open ? "-translate-x-[5.4rem]" : ""} ease-in-out duration-300`} >
+                                                      <span className = {`overflow-hidden relative w-16  cursor-pointer group  `}>
+                                                                  {
+                                                                        !open  && <span className = " opacity-0 rounded-full w-6 h-6 absolute right-[5px] top-[10%] bg-neutral-800/80 hidden md:flex items-center justify-center hover:scale-110 ease-in-out duration-300 hover:bg-neutral-800/90 group-hover:opacity-100">
+                                                                                    <i onClick = {() => addOpen(true)} className='bx bx-chevron-up text-2xl hover:text-white'/>
+                                                                              </span>
+                                                                  }
+                                                                  <Link href = {`/Detail/${idPlayList}`}>
+                                                                  <img className = {``} src= {infoSong?.thumbnail} alt=""/>
+                                                                  </Link>  
+                                                      </span>
+                                    
+
+                                                      <div className = "max-w-[14rem]  lg:block md:block sm:block hidden">
+                                                            {
+                                                                  infoSong?.title?.length > 30 ?
+                                                                  <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title?.slice(0,22) +'.....'}</p>
+                                                                  :
+                                                                  <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title}</p>
+                                                            }
+                                                            <p className = "text-xs">{infoSong?.artistsNames}</p>
+
+                                                      </div>
+
+                                                      <div>
+                                                {
+                                                      like ?
+                                                      <i  onClick={(e) => handleRemoveLikeSong(e)} className='bx bxs-heart text-green-500 cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
+                                                      :
+                                                <i onClick={(e) => handleLikeSong(e)} className='bx bxs-heart cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
+                                                }
+                                                      </div>
+                                    </div>
                     }
-                    <p className = "text-xs">{infoSong?.artistsNames}</p>
-
-            </div>
-
-            <div>
-                  {
-                        like ?
-                        <i  onClick={(e) => handleRemoveLikeSong(e)} className='bx bxs-heart text-green-500 cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
-                        :
-                       <i onClick={(e) => handleLikeSong(e)} className='bx bxs-heart cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
-                  }
-            </div>
-
-            
+                        
 
                  </div>
-            }
            
 
             <div className = "flex flex-col items-center justify-center md:w-[40%] w-[10rem]">
