@@ -39,8 +39,6 @@ const Menu = () => {
 
   const [played , setPlayed] = useState(0)
 
-  const [playMusic, setPlayMusic] = useState<AxiosResponse | null | void>(null)
-
   const length = queue?.length
   
   const addThumbnailM = usePlayMusicStore(state => state?.addThumbnailM)
@@ -63,7 +61,6 @@ const Menu = () => {
                    addThumbnailM(item?.thumbnailM)
                    changeMode(true)
                    const result = await GetSong(item?.encodeId)
-                   setPlayMusic(result)
                    changeMode(false)
                    if(result?.data?.['128']){
                          if(audio.current && playMode){
@@ -251,43 +248,47 @@ const handleRemoveLikeSong = (e) => {
     
     <div className = "w-screen bg-stone-900 px-5 fixed bottom-0 py-1 z-[9999999999]">
         <div className = "flex items-center justify-between w-full text-gray-300 text-sm py-2 ">
-            <div className = {` flex items-center gap-4 relative  md:w-[22%] w-[5rem]  overflow-hidden ${open ? "-translate-x-[5.4rem]" : ""} ease-in-out duration-300`} >
+            {
+                  infoSong &&
+                  <div className = {` flex items-center gap-4 relative  md:w-[22%] w-[5rem]  overflow-hidden ${open ? "-translate-x-[5.4rem]" : ""} ease-in-out duration-300`} >
                 
-                        <span className = {`overflow-hidden relative w-16  cursor-pointer group  `}>
-                              {
-                                    !open  && <span className = " opacity-0 rounded-full w-6 h-6 absolute right-[5px] top-[10%] bg-neutral-800/80 hidden md:flex items-center justify-center hover:scale-110 ease-in-out duration-300 hover:bg-neutral-800/90 group-hover:opacity-100">
-                                                  <i onClick = {() => addOpen(true)} className='bx bx-chevron-up text-2xl hover:text-white'/>
-                                            </span>
-                              }
-                              <Link href = {`/Detail/${idPlayList}`}>
-                                  <img className = {``} src= {infoSong?.thumbnail} alt=""/>
-                              </Link>  
-                        </span>
-                 
-
-                  <div className = "max-w-[14rem]  lg:block md:block sm:block hidden">
-                          {
-                              infoSong?.title?.length > 30 ?
-                              <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title?.slice(0,22) +'.....'}</p>
-                              :
-                              <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title}</p>
-                          }
-                          <p className = "text-xs">{infoSong?.artistsNames}</p>
-
-                  </div>
-
-                  <div>
+                  <span className = {`overflow-hidden relative w-16  cursor-pointer group  `}>
                         {
-                              like ?
-                              <i  onClick={(e) => handleRemoveLikeSong(e)} className='bx bxs-heart text-green-500 cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
-                              :
-                             <i onClick={(e) => handleLikeSong(e)} className='bx bxs-heart cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
+                              !open  && <span className = " opacity-0 rounded-full w-6 h-6 absolute right-[5px] top-[10%] bg-neutral-800/80 hidden md:flex items-center justify-center hover:scale-110 ease-in-out duration-300 hover:bg-neutral-800/90 group-hover:opacity-100">
+                                            <i onClick = {() => addOpen(true)} className='bx bx-chevron-up text-2xl hover:text-white'/>
+                                      </span>
                         }
-                  </div>
+                        <Link href = {`/Detail/${idPlayList}`}>
+                            <img className = {``} src= {infoSong?.thumbnail} alt=""/>
+                        </Link>  
+                  </span>
+           
 
-                  
+            <div className = "max-w-[14rem]  lg:block md:block sm:block hidden">
+                    {
+                        infoSong?.title?.length > 30 ?
+                        <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title?.slice(0,22) +'.....'}</p>
+                        :
+                        <p className="text-white font-bold mb-1 overflow-hidden w-full">{infoSong?.title}</p>
+                    }
+                    <p className = "text-xs">{infoSong?.artistsNames}</p>
 
             </div>
+
+            <div>
+                  {
+                        like ?
+                        <i  onClick={(e) => handleRemoveLikeSong(e)} className='bx bxs-heart text-green-500 cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
+                        :
+                       <i onClick={(e) => handleLikeSong(e)} className='bx bxs-heart cursor-pointer hover:text-white ease-in-out duration-500 text-xl'></i>
+                  }
+            </div>
+
+            
+
+                 </div>
+            }
+           
 
             <div className = "flex flex-col items-center justify-center md:w-[40%] w-[10rem]">
                   <div className = "flex items-center gap-5 w-full justify-center text-base md:text-xl cursor-pointer mb-1 ">
@@ -306,7 +307,7 @@ const handleRemoveLikeSong = (e) => {
                   <div className = "flex items-center justify-center gap-3 w-full">
                       <span className = "text-[11px]">{CovertTime(played)}</span>
                          <input onChange = {(e) => handleChangeInput(e)} className = "w-full h-1 in-range:bg-red-300 out-of-range:bg-blue-700 " type = "range" value = {progress}  step="1" min="0" max="100"/>
-                      <span className = "text-[11px]">{CovertTime(infoSong?.duration)}</span>
+                      <span className = "text-[11px]">{CovertTime(infoSong?.duration ? infoSong.duration : 0)}</span>
                   </div>
             </div>
 
