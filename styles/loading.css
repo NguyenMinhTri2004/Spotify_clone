@@ -1,4 +1,4 @@
-
+/* 
 .loading {
 	display: flex;
 	align-items: center;
@@ -31,7 +31,7 @@
 }
 /*:after element = circle at the end of each line.
 :before element = cap in be start of each line*/
-.cyan:after {
+/* .cyan:after {
 	position: absolute;
 	content: "";
 	width: 10px;
@@ -129,4 +129,4 @@
 	100% {
 		transform: rotate(480deg);
 	}
-}
+}  */
