@@ -255,7 +255,7 @@ const handleRemoveLikeSong = (e) => {
                 
                         <span className = {`overflow-hidden relative w-16  cursor-pointer group  `}>
                               {
-                                    !open  && <span className = " opacity-0 rounded-full w-6 h-6 absolute right-[5px] top-[10%] bg-neutral-800/80 flex items-center justify-center hover:scale-110 ease-in-out duration-300 hover:bg-neutral-800/90 group-hover:opacity-100">
+                                    !open  && <span className = " opacity-0 rounded-full w-6 h-6 absolute right-[5px] top-[10%] bg-neutral-800/80 hidden md:flex items-center justify-center hover:scale-110 ease-in-out duration-300 hover:bg-neutral-800/90 group-hover:opacity-100">
                                                   <i onClick = {() => addOpen(true)} className='bx bx-chevron-up text-2xl hover:text-white'/>
                                             </span>
                               }
