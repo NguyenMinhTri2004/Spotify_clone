@@ -73,7 +73,6 @@ const Menu = () => {
                                      setPlay(true)  
                                
                           }
-
                    }else{
                         handleAlert('error', "Bài hát không tồn tại trên server !!!")
                    }
@@ -126,7 +125,7 @@ const Menu = () => {
             setPlay(true)
        }
 
-}, [idSong , like , playMode, changePlayList , likedSongs?.length , playMusic?.data?.['128'] ])
+}, [idSong , like , playMode, changePlayList , likedSongs?.length ])
 
       
 
