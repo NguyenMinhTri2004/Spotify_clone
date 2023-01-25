@@ -65,13 +65,18 @@ const Menu = () => {
                    const result = await GetSong(item?.encodeId)
                    setPlayMusic(result)
                    changeMode(false)
-                   if(audio.current && playMode){
-                               audio.current.src = result?.data?.['128']
-                               audio?.current?.load()
-                               audio?.current?.play()
-                               setPlay(true)  
-                         
-                    }
+                   if(result?.data?.['128']){
+                         if(audio.current && playMode){
+                                     audio.current.src = result?.data?.['128']
+                                     audio?.current?.load()
+                                     audio?.current?.play()
+                                     setPlay(true)  
+                               
+                          }
+
+                   }else{
+                        handleAlert('error', "Bài hát không tồn tại trên server !!!")
+                   }
              }else{
                  handleNext()
              }
